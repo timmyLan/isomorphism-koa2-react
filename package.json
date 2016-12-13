@@ -1,0 +1,12 @@
+{
+  "name": "iot-web",
+  "version": "1.0.0",
+  "description": "iot web development",
+  "main": "index.js",
+  "repository": {
+    "url": "http://gitlab.test.amwares.com/llan/iot-web.git",
+    "type": "git"
+  },
+  "author": "llan",
+  "license": "MIT"
+}
