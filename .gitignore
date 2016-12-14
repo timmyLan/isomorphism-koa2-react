@@ -9,3 +9,12 @@ gen
 
 #node_modules
 node_modules
+
+#build
+dist/
+public/build/
+
+#config
+platforms/common/config/*
+!platforms/common/config/default.js
+!platforms/common/config/index.js

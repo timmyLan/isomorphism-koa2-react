@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import {Menu, Breadcrumb} from 'antd';
+import {mock} from 'mockjs'
 import 'antd/dist/antd.css'
 import '../common/layout.less'
 
@@ -13,8 +14,9 @@ class App extends Component {
                 <div className="ant-layout-top">
                     <div className="ant-layout-header">
                         <div className="ant-layout-wrapper">
-                            <div className="ant-layout-logo"><img src="//7xi480.com1.z0.glb.clouddn.com/avatar100.jpg"
-                                                                  width="50"/></div>
+                            <div className="ant-layout-logo">
+                                <img src={mock('@image(300x300, #50B347, #FFF, Mock.js)')} width="50"/>
+                            </div>
                             <Menu theme="dark" mode="horizontal" style={{lineHeight: '64px'}}
                                   selectedKeys={[currentMenu]}>
                                 <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
