@@ -1,0 +1,8 @@
+# /node_modules/* and /bower_components/* ignored by default
+node_modules/*
+# Ignore public/static files
+public/static/*
+#Ignore platforms files
+platforms/*
+#Ignore bin files
+bin/*
