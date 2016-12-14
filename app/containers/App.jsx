@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
-import {connect} from 'react-redux'
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import {Menu, Breadcrumb} from 'antd';
-import {mock} from 'mockjs'
-import 'antd/dist/antd.css'
-import '../common/layout.less'
+import {mock} from 'mockjs';
+import 'antd/dist/antd.css';
+import '../common/layout.less';
 
 class App extends Component {
     render() {

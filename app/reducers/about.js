@@ -13,7 +13,7 @@ export default (state = {value: 3}, action) => {
 		case GET_ABOUT_FAILED:
 			return {...state, loaded: false};
 		case CHANGE_START:
-			return {...state, value:action.value};
+			return {...state, value: action.value};
 		default:
 			return state
 	}
