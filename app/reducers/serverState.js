@@ -5,7 +5,6 @@ export default (state = {}, action) => {
 		case SERVER_STATE_REQUEST:
 			return {...state};
 		case SERVER_STATE_SUCCEED:
-			console.log(action.data);
 			const _data = {
 				serverConfig: action.data.result,
 				loaded: true

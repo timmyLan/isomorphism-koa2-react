@@ -43,6 +43,5 @@ class App extends Component {
 }
 
 export default connect(state => {
-    console.log(state);
     return state.server;
 })(App)
