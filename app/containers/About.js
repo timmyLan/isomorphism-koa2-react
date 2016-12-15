@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Rate} from 'antd';
+import {Rate, Button} from 'antd';
 import {connect} from 'react-redux';
-import {fetchAbout, changeStart} from '../actions/about';
+import {fetchAbout, changeStart, changeAbout} from '../actions/about';
 
 @connect(
 	state => state.about,
@@ -19,17 +19,22 @@ class About extends Component {
 		}
 	}
 
-	handleChange(value) {
+	handleChangeStart(value) {
 		this.props.dispatch(changeStart(value));
+	}
+
+	handleChangeAbout() {
+		this.props.dispatch(changeAbout());
 	}
 
 	render() {
 		const {about, value} = this.props;
 		return (
 			<div>
-				<Rate onChange={this.handleChange.bind(this)} value={value}/>
+				<Rate onChange={(value)=>this.handleChangeStart(value)} value={value}/>
 				{value && <span className="ant-rate-text">{value} stars</span>}
 				<p>{about}</p>
+				<Button type="primary" onClick={()=>this.handleChangeAbout()}>Change About</Button>
 			</div>
 		)
 	}

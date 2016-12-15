@@ -5,36 +5,36 @@ export const GET_NEWS_SUCCEED = 'GET_NEWS_SUCCEED';
 export const GET_NEWS_FAILED = 'GET_NEWS_FAILED';
 
 const fetchStateUrl = __SERVER__
-  ? `http://localhost:${require('../../platforms/common/config').port}/api/news`
-  : '/api/news';
+	? `http://localhost:${require('../../platforms/common/config').port}/api/news`
+	: '/api/news';
 
-export function fetchNews(state){
-  return (dispatch) => {
-    dispatch(newsRequest());
-    return fetch(fetchStateUrl)
-      .then(res => res.json())
-      .then(data => {
-        dispatch(newsSucceed(data))
-      })
-      .catch(e => dispatch(newsFailed(e)))
-  }
-}
+exports.fetchNews = ()=> {
+	return async(dispatch)=> {
+		dispatch(newsRequest());
+		try {
+			let response = await fetch(fetchStateUrl);
+			let data = await response.json();
+			return dispatch(newsSucceed(data))
 
-export function newsRequest () {
-  return {
-    type: GET_NEWS_REQUEST
-  }
-}
-export function newsSucceed (data) {
-  return {
-    type: GET_NEWS_SUCCEED,
-    data: data
-  }
-}
-export function newsFailed (error) {
-  console.log('server state get failed', error);
-  return {
-    type: GET_NEWS_FAILED,
-    error
-  }
-}
+		} catch (e) {
+			return dispatch(newsFailed(e));
+		}
+	}
+};
+
+const newsRequest = ()=>({
+	type: GET_NEWS_REQUEST
+});
+
+const newsSucceed = (data)=>({
+	type: GET_NEWS_SUCCEED,
+	data: data
+});
+
+const newsFailed = (error)=> {
+	console.log('server state get failed', error);
+	return {
+		type: GET_NEWS_FAILED,
+		error
+	}
+};

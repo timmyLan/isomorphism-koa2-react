@@ -8,42 +8,43 @@ export const SERVER_STATE_FAILED = 'SERVER_STATE_FAILED';
 //客户端使用ajax，使用相对路径
 //这里也可以使用 __SERVER__ ＝ typeof window !== 'undefined'
 const fetchStateUrl = __SERVER__
-  ? `http://localhost:${require('../../platforms/common/config').port}/api/server`
-  : '/api/server';
+	? `http://localhost:${require('../../platforms/common/config').port}/api/server`
+	: '/api/server';
 
-function fetchServerState(){
-  return dispatch => {
-    dispatch(serverStateRequest());
-    return fetch(fetchStateUrl)
-      .then(res => res.json())
-      .then(data => {
-        dispatch(serverStateSucceed(data))
-      })
-      .catch(e => dispatch(serverStateFailed(e)))
-  }
-}
+exports.fetchServerStateIfNeeded = ()=> {
+	return (dispatch) => {
+		return dispatch(fetchServerState())
+	}
+};
 
-export function fetchServerStateIfNeeded (state) {
-  return (dispatch) => {
-    return dispatch(fetchServerState())
-  }
-}
+const fetchServerState = ()=> {
+	return async(dispatch) => {
+		dispatch(serverStateRequest());
+		try {
+			let response = await fetch(fetchStateUrl);
+			let data = await response.json();
+			return dispatch(serverStateSucceed(data))
 
-export function serverStateRequest () {
-  return {
-    type: SERVER_STATE_REQUEST
-  }
-}
-export function serverStateSucceed (data) {
-  return {
-    type: SERVER_STATE_SUCCEED,
-    data: data
-  }
-}
-export function serverStateFailed (error) {
-  console.log('server state get failed', error);
-  return {
-    type: SERVER_STATE_FAILED,
-    error
-  }
-}
+		} catch (e) {
+			return dispatch(serverStateFailed(e));
+		}
+	}
+};
+
+
+const serverStateRequest = ()=>({
+	type: SERVER_STATE_REQUEST
+});
+
+const serverStateSucceed = (data)=>({
+	type: SERVER_STATE_SUCCEED,
+	data: data
+});
+
+const serverStateFailed = (error)=> {
+	console.log('server state get failed', error);
+	return {
+		type: SERVER_STATE_FAILED,
+		error
+	}
+};

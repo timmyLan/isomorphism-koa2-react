@@ -4,45 +4,60 @@ export const GET_ABOUT_REQUEST = 'GET_ABOUT_REQUEST';
 export const GET_ABOUT_SUCCEED = 'GET_ABOUT_SUCCEED';
 export const GET_ABOUT_FAILED = 'GET_ABOUT_FAILED';
 export const CHANGE_START = 'CHANGE_START';
+export const CHANGE_ABOUT = 'CHANGE_ABOUT';
 
 const fetchStateUrl = __SERVER__
 	? `http://localhost:${require('../../platforms/common/config').port}/api/about`
 	: '/api/about';
 
-export function fetchAbout(state) {
-	return (dispatch) => {
+exports.fetchAbout = ()=> {
+	return async(dispatch)=> {
 		dispatch(aboutRequest());
-		return fetch(fetchStateUrl)
-			.then(res => res.json())
-			.then(data => {
-				dispatch(aboutSucceed(data))
-			})
-			.catch(e => dispatch(aboutFailed(e)))
+		try {
+			let response = await fetch(fetchStateUrl);
+			let data = await response.json();
+			return dispatch(aboutSucceed(data));
+		} catch (e) {
+			return dispatch(aboutFailed(e));
+		}
 	}
-}
+};
 
-export function changeStart(value) {
-	return {
-		type: CHANGE_START,
-		value: value
-	}
-}
+exports.changeStart = (value)=> ({
+	type: CHANGE_START,
+	value: value
+});
 
-export function aboutRequest() {
-	return {
-		type: GET_ABOUT_REQUEST
+exports.changeAbout = ()=> {
+	return async (dispatch)=> {
+		try {
+			let response = await fetch('/api/about', {
+				method: 'POST'
+			});
+			let data = await response.json();
+			return dispatch({
+				type: CHANGE_ABOUT,
+				data: data
+			});
+		} catch (e) {
+			console.log('error', e);
+		}
 	}
-}
-export function aboutSucceed(data) {
-	return {
-		type: GET_ABOUT_SUCCEED,
-		data: data
-	}
-}
-export function aboutFailed(error) {
+};
+
+const aboutRequest = ()=> ({
+	type: GET_ABOUT_REQUEST
+});
+
+const aboutSucceed = (data)=>({
+	type: GET_ABOUT_SUCCEED,
+	data: data
+});
+
+const aboutFailed = (error)=> {
 	console.log('server state get failed', error);
 	return {
 		type: GET_ABOUT_FAILED,
 		error
 	}
-}
+};
