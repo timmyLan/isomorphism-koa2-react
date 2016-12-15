@@ -1,7 +1,7 @@
 /**
  * Server端的默认配置
  */
-import path from 'path'
+import path from 'path';
 
 const rootPath = path.join(__dirname, '../../..');
 export default {
