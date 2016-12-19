@@ -40,7 +40,7 @@ script
     "production": "node bin/production.js", //production
     "build": "npm run clean && webpack --config webpack.build.js", //build
     "clean": "rm -rf public/build/ && rm -rf dist/", //clean
-    "test": "mocha -u bdd --compilers js:babel-core/register", //test
+    "test": "./node_modules/karma/bin/karma start test/karma.conf.js", //test
     "dev": "npm start" //development
 }
 ```
