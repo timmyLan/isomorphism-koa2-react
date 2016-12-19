@@ -20,7 +20,20 @@ module.exports = function (config) {
 			// Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
 			exitOnResourceError: true
 		},
-		reporters: ['spec'],
+		reporters: ['spec', 'coverage'],
+		coverageReporter: {
+			dir: 'coverage',
+			reporters: [{
+				type: 'json',
+				subdir: '.',
+				file: 'coverage.json',
+			}, {
+				type: 'lcov',
+				subdir: '.'
+			}, {
+				type: 'text-summary'
+			}]
+		},
 		webpack: webpackConfig,
 		webpackMiddleware: {
 			// webpack-dev-middleware configuration
