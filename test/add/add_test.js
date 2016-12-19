@@ -7,3 +7,4 @@ describe('add', function () {
 		add(1,1).should.equal(2);
 	});
 });
+
