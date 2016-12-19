@@ -1,23 +1,23 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production'
 
-require('babel-core/register');
-var config = require('./platforms/common/config');
-var webpack = require('webpack');
-var path = require('path');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractStyle = new ExtractTextPlugin('all.min.css');
-var rucksack = require('rucksack-css');
-var autoprefixer = require('autoprefixer');
-var fs = require('fs');
+require('babel-core/register')
+var config = require('./platforms/common/config')
+var webpack = require('webpack')
+var path = require('path')
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var extractStyle = new ExtractTextPlugin('all.min.css')
+var rucksack = require('rucksack-css')
+var autoprefixer = require('autoprefixer')
+var fs = require('fs')
 var nodeModules = fs.readdirSync('node_modules')
   .filter(function (i) {
     return ['.bin', '.npminstall'].indexOf(i) === -1
-  });
+  })
 var includes = [
   path.resolve(__dirname, 'app'),
   path.resolve(__dirname, 'platforms')
-];
+]
 
 module.exports = [{
   name: 'browser side render',
@@ -141,4 +141,4 @@ module.exports = [{
       __SERVER__: true
     })
   ]
-}];
+}]
