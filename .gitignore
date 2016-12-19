@@ -21,3 +21,4 @@ platforms/common/config/*
 
 #test
 coverage/
+karma-*/

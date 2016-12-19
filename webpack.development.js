@@ -1,13 +1,13 @@
-process.env.NODE_ENV = 'development'
+process.env.NODE_ENV = 'development';
 
-var webpack = require('webpack')
-var path = require('path')
-var rucksack = require('rucksack-css')
-var autoprefixer = require('autoprefixer')
+var webpack = require('webpack');
+var path = require('path');
+var rucksack = require('rucksack-css');
+var autoprefixer = require('autoprefixer');
 var includes = [
   path.resolve(__dirname, 'app'),
   path.resolve(__dirname, 'platforms')
-]
+];
 
 module.exports = {
   name: 'backend dev hot middlware',
@@ -78,4 +78,4 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
-}
+};
