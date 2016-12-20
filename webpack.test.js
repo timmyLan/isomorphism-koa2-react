@@ -5,9 +5,9 @@ process.env.NODE_ENV = 'test';
 
 var webpack = require('webpack');
 var path = require('path');
-
 module.exports = {
 	name: 'run test webpack',
+	devtool: 'inline-source-map',
 	externals: {
 		cheerio: 'window',
 		'react/lib/ExecutionEnvironment': true,
@@ -19,7 +19,18 @@ module.exports = {
 			{
 				test: /\.jsx|.js$/,
 				exclude: /node_modules/,
-				loader: 'babel'
+				include:[
+					path.resolve('app/'),
+					path.resolve('test/')
+				],
+				loader: 'babel',
+				query: {
+					plugins: [
+						["inline-replace-variables", {
+							"__SERVER__": false
+						}]
+					]
+				}
 			}, {
 				test: /\.css$/,
 				loader: 'style!css'
@@ -37,7 +48,7 @@ module.exports = {
 		],
 		preLoaders: [{
 			test: /\.jsx|.js$/,
-			include: [path.resolve('helper/')],
+			include: [path.resolve('app/')],
 			loader: 'isparta'
 		}]
 	}

@@ -4,7 +4,7 @@
 var webpackConfig = require('../webpack.test');
 module.exports = function (config) {
 	config.set({
-		frameworks: ['mocha', 'chai'],
+		frameworks: ['mocha', 'sinon-stub-promise', 'sinon-chai', 'chai'],
 		// ... normal karma configuration
 		files: [
 			// all files ending in "_test"
@@ -13,7 +13,7 @@ module.exports = function (config) {
 		],
 		preprocessors: {
 			// add webpack as preprocessor
-			'test_index.js': ['webpack']
+			'test_index.js': ['webpack','sourcemap']
 		},
 		browsers: ['PhantomJS'],
 		phantomjsLauncher: {

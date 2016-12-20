@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import * as Validators from '../helpers/validator';
 
 export const GET_ABOUT_REQUEST = 'GET_ABOUT_REQUEST';
 export const GET_ABOUT_SUCCEED = 'GET_ABOUT_SUCCEED';
@@ -25,7 +26,8 @@ exports.fetchAbout = ()=> {
 
 exports.changeStart = (value)=> ({
 	type: CHANGE_START,
-	value: value
+	value: value,
+	error: Validators.changeStart(value)
 });
 
 exports.changeAbout = ()=> {
@@ -45,17 +47,16 @@ exports.changeAbout = ()=> {
 	}
 };
 
-const aboutRequest = ()=> ({
+export const aboutRequest = ()=> ({
 	type: GET_ABOUT_REQUEST
 });
 
-const aboutSucceed = (data)=>({
+export const aboutSucceed = (data)=>({
 	type: GET_ABOUT_SUCCEED,
 	data: data
 });
 
-const aboutFailed = (error)=> {
-	console.log('server state get failed', error);
+export const aboutFailed = (error)=> {
 	return {
 		type: GET_ABOUT_FAILED,
 		error
