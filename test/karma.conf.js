@@ -4,7 +4,7 @@
 var webpackConfig = require('../webpack.test');
 module.exports = function (config) {
 	config.set({
-		frameworks: ['mocha', 'sinon-stub-promise', 'sinon-chai', 'chai'],
+		frameworks: ['mocha', 'chai'],
 		// ... normal karma configuration
 		files: [
 			// all files ending in "_test"

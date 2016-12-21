@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'isomorphic-fetch';
 import * as Validators from '../helpers/validator';
 
 export const GET_ABOUT_REQUEST = 'GET_ABOUT_REQUEST';
@@ -7,9 +7,8 @@ export const GET_ABOUT_FAILED = 'GET_ABOUT_FAILED';
 export const CHANGE_START = 'CHANGE_START';
 export const CHANGE_ABOUT = 'CHANGE_ABOUT';
 
-const fetchStateUrl = __SERVER__
-	? `http://localhost:${require('../../platforms/common/config').port}/api/about`
-	: '/api/about';
+const fetchStateUrl = __SERVER__ ? `http://localhost:${require('../../platforms/common/config').port}/api/about` :
+	'/api/about';
 
 exports.fetchAbout = ()=> {
 	return async(dispatch)=> {
@@ -31,7 +30,7 @@ exports.changeStart = (value)=> ({
 });
 
 exports.changeAbout = ()=> {
-	return async (dispatch)=> {
+	return async(dispatch)=> {
 		try {
 			let response = await fetch('/api/about', {
 				method: 'POST'
@@ -47,16 +46,16 @@ exports.changeAbout = ()=> {
 	}
 };
 
-export const aboutRequest = ()=> ({
+const aboutRequest = ()=> ({
 	type: GET_ABOUT_REQUEST
 });
 
-export const aboutSucceed = (data)=>({
+const aboutSucceed = (data)=>({
 	type: GET_ABOUT_SUCCEED,
 	data: data
 });
 
-export const aboutFailed = (error)=> {
+const aboutFailed = (error)=> {
 	return {
 		type: GET_ABOUT_FAILED,
 		error

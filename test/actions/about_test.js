@@ -1,34 +1,29 @@
 /**
  * Created by llan on 2016/12/20.
  */
+require('babel-polyfill');
+import 'isomorphic-fetch';
+import sinon from 'sinon';
+import fetchMock from 'fetch-mock';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import * as Actions from '../../app/actions/about';
+
+const middlewares = [ thunk ];
+const mockStore = configureMockStore(middlewares);
 
 describe('actions/about', () => {
 	let actions,
-		dispatchSpy,
-		getStateSpy,
-		xhr,
-		requests;
+		dispatchSpy;
 
 	beforeEach(function () {
-		console.log('each');
 		actions = [];
 		dispatchSpy = sinon.spy(action => {
 			actions.push(action)
 		});
-		xhr = sinon.useFakeXMLHttpRequest();
-		requests = [];
-		xhr.onCreate = function(xhr) {
-			console.log('create');
-			requests.push(xhr);
-		};
 	});
 
-	afterEach(function() {
-		xhr.restore();
-	});
-
-	describe('export constant',()=>{
+	describe('export constant', ()=> {
 		it('Should export a constant GET_ABOUT_REQUEST.', () => {
 			expect(Actions.GET_ABOUT_REQUEST).to.equal('GET_ABOUT_REQUEST');
 		});
@@ -45,19 +40,15 @@ describe('actions/about', () => {
 			expect(Actions.CHANGE_ABOUT).to.equal('CHANGE_ABOUT');
 		});
 	});
-	describe('action fetchAbout',()=>{
+	describe('action fetchAbout', ()=> {
 		it('fetchAbout should be exported as a function.', () => {
 			expect(Actions.fetchAbout).to.be.a('function')
 		});
 		it('fetchAbout should return a function (is a thunk).', () => {
 			expect(Actions.fetchAbout()).to.be.a('function')
 		});
-		it('Should call dispatch GET_ABOUT_SUCCEED', () => {
-			Actions.fetchAbout()(dispatchSpy);
-			
-		});
 	});
-	describe('action changeStart',()=>{
+	describe('action changeStart', ()=> {
 		it('changeStart should be exported as a function.', () => {
 			expect(Actions.changeStart).to.be.a('function')
 		});
@@ -71,9 +62,38 @@ describe('actions/about', () => {
 			expect(action).to.have.property('error').to.not.be.empty
 		});
 	});
-	describe('action changeAbout',()=>{
+	describe('action changeAbout', ()=> {
 		it('changeAbout be exported as a function.', () => {
 			expect(Actions.changeAbout).to.be.a('function')
+		});
+	});
+	describe('async action', ()=> {
+		it('Should done when fetch action aboutSucceed', async()=> {
+			const data = {
+				"code": 200,
+				"msg": "ok",
+				"result": {
+					"value": 4,
+					"about": "it's my about"
+				}
+			};
+			// 期望的发起请求的 action
+			const actRequest = {
+				type: Actions.GET_ABOUT_REQUEST
+			};
+			// 期望的请求成功的 action
+			const actSuccess = {
+				type: Actions.GET_ABOUT_SUCCEED,
+				data:data
+			};
+			const expectedActions = [
+				actRequest,
+				actSuccess,
+			];
+			fetchMock.mock(`begin:/api/about`,data);
+			const store = mockStore({});
+			await store.dispatch(Actions.fetchAbout());
+			expect(store.getActions()).to.deep.equal(expectedActions);
 		});
 	});
 });

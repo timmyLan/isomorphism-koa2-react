@@ -12,14 +12,15 @@ module.exports = {
 		cheerio: 'window',
 		'react/lib/ExecutionEnvironment': true,
 		'react/addons': true,
-		'react/lib/ReactContext': true
+		'react/lib/ReactContext': true,
+		fs: '{}'
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.jsx|.js$/,
 				exclude: /node_modules/,
-				include:[
+				include: [
 					path.resolve('app/'),
 					path.resolve('test/')
 				],
