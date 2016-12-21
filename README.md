@@ -26,11 +26,16 @@ iot web development
 │   └── server #服务相关
 ├── public
 │   └── favicon.ico
+├── test
+│   ├── actions
+│   │   └── about_test.js
+│   ├── karma.conf.js
+│   └── test_index.js
 ├── webpack.build.js #production webpack
 ├── webpack.development.js #development webpack
+├── webpack.test.js #test webpack
 └── yarn.lock #yarn.lock
 
-13 directories, 13 files
 ```
 script
 ----
