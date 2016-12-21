@@ -18,7 +18,7 @@ exports.fetchAbout = ()=> {
 			let data = await response.json();
 			return dispatch(aboutSucceed(data));
 		} catch (e) {
-			return dispatch(aboutFailed(e));
+			return dispatch(aboutFailed());
 		}
 	}
 };
@@ -41,7 +41,7 @@ exports.changeAbout = ()=> {
 				data: data
 			});
 		} catch (e) {
-			console.log('error', e);
+			console.log('error',e);
 		}
 	}
 };
@@ -55,9 +55,8 @@ const aboutSucceed = (data)=>({
 	data: data
 });
 
-const aboutFailed = (error)=> {
+const aboutFailed = ()=> {
 	return {
-		type: GET_ABOUT_FAILED,
-		error
+		type: GET_ABOUT_FAILED
 	}
 };

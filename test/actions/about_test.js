@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as Actions from '../../app/actions/about';
 
-const middlewares = [ thunk ];
+const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('actions/about', () => {
@@ -68,32 +68,76 @@ describe('actions/about', () => {
 		});
 	});
 	describe('async action', ()=> {
-		it('Should done when fetch action aboutSucceed', async()=> {
-			const data = {
-				"code": 200,
-				"msg": "ok",
-				"result": {
-					"value": 4,
-					"about": "it's my about"
-				}
-			};
-			// 期望的发起请求的 action
-			const actRequest = {
-				type: Actions.GET_ABOUT_REQUEST
-			};
-			// 期望的请求成功的 action
-			const actSuccess = {
-				type: Actions.GET_ABOUT_SUCCEED,
-				data:data
-			};
-			const expectedActions = [
-				actRequest,
-				actSuccess,
-			];
-			fetchMock.mock(`begin:/api/about`,data);
-			const store = mockStore({});
-			await store.dispatch(Actions.fetchAbout());
-			expect(store.getActions()).to.deep.equal(expectedActions);
+
+		afterEach(fetchMock.restore);
+		describe('action fetchAbout', ()=> {
+			it('Should be done when fetch action fetchAbout', async()=> {
+				const data = {
+					"code": 200,
+					"msg": "ok",
+					"result": {
+						"value": 4,
+						"about": "it's my about"
+					}
+				};
+				// 期望的发起请求的 action
+				const actRequest = {
+					type: Actions.GET_ABOUT_REQUEST
+				};
+				// 期望的请求成功的 action
+				const actSuccess = {
+					type: Actions.GET_ABOUT_SUCCEED,
+					data: data
+				};
+				const expectedActions = [
+					actRequest,
+					actSuccess,
+				];
+				fetchMock.mock(`begin:/api/about`, data);
+				const store = mockStore({});
+				await store.dispatch(Actions.fetchAbout());
+				expect(store.getActions()).to.deep.equal(expectedActions);
+			});
+			it('Should be failed when fetch action fetchAbout', async()=> {
+				// 期望的发起请求的 action
+				const actRequest = {
+					type: Actions.GET_ABOUT_REQUEST
+				};
+				// 期望的请求失败的 action
+				const actFailed = {
+					type: Actions.GET_ABOUT_FAILED
+				};
+				const expectedActions = [
+					actRequest,
+					actFailed,
+				];
+				fetchMock.mock(`begin:/api/about`, 500);
+				const store = mockStore({});
+				await store.dispatch(Actions.fetchAbout());
+				expect(store.getActions()).to.deep.equal(expectedActions);
+			});
+		});
+		describe('action changeAbout', ()=> {
+			it('Should be done when fetch action changeAbout', async()=> {
+				const data = {
+					"code": 200,
+					"msg": "ok",
+					"result": {
+						"about": "it's changeAbout fetch about"
+					}
+				};
+				const acSuccess = {
+					type: Actions.CHANGE_ABOUT,
+					data: data
+				};
+				const expectedActions = [
+					acSuccess
+				];
+				fetchMock.mock(`begin:/api/about`, data, {method: 'POST'});
+				const store = mockStore({});
+				await store.dispatch(Actions.changeAbout());
+				expect(store.getActions()).to.deep.equal(expectedActions);
+			});
 		});
 	});
 });
