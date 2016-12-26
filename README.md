@@ -1,6 +1,6 @@
 iot-web:fire:
 ===
-iot web development
+iot web development [![Build Status](https://travis-ci.org/timmyLan/isomorphism-koa2-react.svg?branch=master)](https://travis-ci.org/timmyLan/isomorphism-koa2-react)
 
 目录结构
 ---
