@@ -34,7 +34,7 @@ class About extends Component {
 				<Rate onChange={(value)=>this.handleChangeStart(value)} value={value}/>
 				{value && <span className="ant-rate-text">{value} stars</span>}
 				<p>{about}</p>
-				<Button type="primary" onClick={()=>this.handleChangeAbout()}>Change About</Button>
+				<Button type="primary" id="change-about" onClick={()=>this.handleChangeAbout()}>Change About</Button>
 			</div>
 		)
 	}

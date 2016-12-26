@@ -20,7 +20,7 @@ module.exports = function (config) {
 			// Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
 			exitOnResourceError: true
 		},
-		reporters: ['spec', 'coverage'],
+		reporters: ['mocha', 'coverage'],
 		coverageReporter: {
 			dir: 'coverage',
 			reporters: [{

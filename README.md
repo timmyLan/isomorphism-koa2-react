@@ -26,11 +26,11 @@ iot web development
 │   └── server #服务相关
 ├── public
 │   └── favicon.ico
-├── test
-│   ├── actions
+├── test #测试代码相关
+│   ├── actions #测试redux actions
 │   │   └── about_test.js
-│   ├── karma.conf.js
-│   └── test_index.js
+│   ├── karma.conf.js #karma.conf
+│   └── test_index.js #测试入口文件
 ├── webpack.build.js #production webpack
 ├── webpack.development.js #development webpack
 ├── webpack.test.js #test webpack

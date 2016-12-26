@@ -75,6 +75,9 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development')
+		})
 	]
 };
