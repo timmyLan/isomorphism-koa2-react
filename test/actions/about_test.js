@@ -3,7 +3,6 @@
  */
 require('babel-polyfill');
 import 'isomorphic-fetch';
-import sinon from 'sinon';
 import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

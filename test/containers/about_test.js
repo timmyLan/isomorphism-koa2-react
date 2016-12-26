@@ -4,7 +4,6 @@
 import React from 'react';
 import {Rate, Button} from 'antd';
 import {shallow} from 'enzyme';
-import sinon from 'sinon';
 import { bindActionCreators } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
