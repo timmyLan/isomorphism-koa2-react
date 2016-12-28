@@ -1,6 +1,6 @@
-iot-web:fire:
+isomorphism-koa2-react:fire:
 ===
-iot web development [![Build Status](https://travis-ci.org/timmyLan/isomorphism-koa2-react.svg?branch=master)](https://travis-ci.org/timmyLan/isomorphism-koa2-react)
+isomorphism-koa2-react [![Build Status](https://travis-ci.org/timmyLan/isomorphism-koa2-react.svg?branch=master)](https://travis-ci.org/timmyLan/isomorphism-koa2-react)
 
 目录结构
 ---
