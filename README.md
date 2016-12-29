@@ -2,6 +2,37 @@ isomorphism-koa2-react:fire:
 ===
 isomorphism-koa2-react [![Build Status](https://travis-ci.org/timmyLan/isomorphism-koa2-react.svg?branch=master)](https://travis-ci.org/timmyLan/isomorphism-koa2-react)
 
+自动化构建项目
+---
+通过`yeoman`进行自动化构建该项目
+* install yo using npm
+```
+ npm install -g yo
+```
+* install [`generator-isomorphism-koa2-react`](https://github.com/timmyLan/generator-isomorphism-koa2-react)
+```
+ npm install -g generator-isomorphism-koa2-react
+```
+* mkdir && cd your project directory,eg: 
+```
+ mkdir test && cd test
+```
+* run isomorphism-koa2-react with yo
+```
+ yo isomorphism-koa2-react
+```
+* answers
+```
+? What's the Project name(isomorphism-koa2-react)
+? What's the Project version(1.0.0)
+? What's the Project description()
+? What's the Project git repository()
+? What's your name()
+```
+* finish
+```
+ npm start
+```
 目录结构
 ---
 ```
